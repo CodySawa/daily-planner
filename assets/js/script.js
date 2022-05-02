@@ -22,7 +22,7 @@ function generateTimeBlock(hour) {
     descriptionInput.attr("id", hour);
     if (hour < moment().format("HH")) {
         descriptionInput.attr({"class": "past"});
-    } else if (hour === moment().format("HH")) {
+    } else if (hour == moment().format("HH")) {
         descriptionInput.attr({"class": "present"});
     } else if (hour > moment().format("HH")) {
         descriptionInput.attr({"class": "future"});
@@ -57,6 +57,18 @@ function convertTime(hour) {
     hour = hour ? hour : 12;
     return hour + aORp;
 }
+
+setInterval (function() {
+    for (var i = 9; i <= 18; i++) {
+        if (i < moment().format("HH")) {
+            $(`#${i}`).attr({"class": "past"});
+        } else if (i == moment().format("HH")) {
+            $(`#${i}`).attr({"class": "present"});
+        } else if (i > moment().format("HH")) {
+            $(`#${i}`).attr({"class": "future"});
+        }
+    }
+}, 1000)
 
 displayHeaderDate();
 DisplayTimeBlocks();
